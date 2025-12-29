@@ -1,6 +1,6 @@
 <!-- HERO -->
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Inter&size=28&pause=1000&color=00E5FF&center=true&vCenter=true&width=600&lines=Hi%2C+I'm+Ido+Yahav;Full-Stack+Developer;Always+down+to+collaborate" />
+  <img src="https://readme-typing-svg.demolab.com?font=Inter&size=28&pause=1000&color=00E5FF&center=true&vCenter=true&width=600&lines=Hi%2C+I'm+Ido+Yahav;Just+building+stuff;Always+down+to+collaborate" />
 </p>
 
 ---
