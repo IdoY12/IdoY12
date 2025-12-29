@@ -31,7 +31,6 @@ Active open-source contributor and always learning by doing.
 ### Tools & Platforms
 <p>
   <img src="https://skillicons.dev/icons?i=git,github,vscode,aws,docker" />
-  <img src="https://cdn.simpleicons.org/auth0/EB5424" height="48" />
 </p>
 
 ---
