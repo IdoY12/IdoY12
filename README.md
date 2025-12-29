@@ -25,7 +25,7 @@ Active open-source contributor and always learning by doing.
 
 ### Frameworks & Libraries
 <p>
-  <img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,express,tailwind,prisma" />
+  <img src="https://skillicons.dev/icons?i=react,nodejs,express,tailwind" />
 </p>
 
 ### Tools & Platforms
