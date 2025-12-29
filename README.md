@@ -30,7 +30,7 @@ Active open-source contributor and always learning by doing.
 
 ### Tools & Platforms
 <p>
-  <img src="https://skillicons.dev/icons?i=git,github,vscode,aws" />
+  <img src="https://skillicons.dev/icons?i=git,github,vscode,aws,oauth2.0" />
 </p>
 
 ---
