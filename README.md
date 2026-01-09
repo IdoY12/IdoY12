@@ -34,17 +34,12 @@
 
 ## 🎯 About Me
 
-```typescript
-const ido = {
-    location: "Tel Aviv, Israel 🇮🇱",
-    role: "Full-Stack Developer",
-    focus: ["Web Development", "System Design", "Open Source"],
-    currentlyLearning: ["Advanced React Patterns", "Cloud Architecture", "DevOps"],
-    philosophy: "Write code that humans can read, machines can execute",
-    availability: "Open to interesting projects and collaborations",
-    funFact: "I debug with console.log and I'm not ashamed 🐛"
-};
-```
+<p align="center">
+  <samp>
+    Software Developer focused on building reliable, clean and scalable web applications.<br>
+    Active open-source contributor and always learning by doing.
+  </samp>
+</p>
 
 <details>
 <summary>📖 <b>More about my journey</b></summary>
@@ -162,28 +157,6 @@ I'm a developer who believes in building things that matter. Whether it's a smal
 ## 📈 Contribution Graph
 
 <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=IdoY12&theme=tokyonight" alt="Contribution Graph"/>
-
----
-
-## 💡 Fun Facts & Interests
-
-<table>
-<tr>
-<td>
-
-☕ **Developer Fuel:**
-```javascript
-while (coding) {
-    if (bugs > 0) {
-        coffee.drink();
-        patience++;
-    }
-}
-```
-
-</td>
-</tr>
-</table>
 
 ---
 
