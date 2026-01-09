@@ -197,10 +197,6 @@ I'm always interested in hearing about new projects, opportunities, and tech dis
 [![Email](https://img.shields.io/badge/Email-Drop_a_Line-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:idoyahav15@gmail.com)
 [![Portfolio](https://img.shields.io/badge/Portfolio-View_My_Work-00E5FF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://your-portfolio.com)
 
-### 💬 Quote I Code By
-
-*"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."* — Martin Fowler
-
 ---
 
 <img src="https://komarev.com/ghpvc/?username=IdoY12&color=00E5FF&style=for-the-badge&label=PROFILE+VIEWS" alt="Profile Views"/>
