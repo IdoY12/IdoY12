@@ -35,14 +35,13 @@
 <summary>📖 <b>More about my journey</b></summary>
 <br>
 
-I'm a developer who believes in building things that matter. Whether it's a small script that saves hours of manual work or a full-scale application serving thousands of users, I approach every project with the same level of dedication.
+Disciplined problem solver with a strong technical mindset, focused on writing code and solving problems through practice. Hands-on experience in web application development with TypeScript, Node.js, and growing exposure to AI, ML, and LLM technologies.
 
 **What drives me:**
-- 🚀 **Performance**: Every millisecond counts
-- 🎨 **User Experience**: Beautiful, intuitive interfaces
-- 📚 **Continuous Learning**: Technology evolves, so should we
-- 🤝 **Collaboration**: The best solutions come from diverse perspectives
-- 🌱 **Open Source**: Giving back to the community that taught me so much
+- 🚀 **Performance**: Writing efficient, reliable code
+- 🎨 **User Experience**: Delivering value through well-structured solutions
+- 📚 **Continuous Learning**: Deepening technical understanding through hands-on work
+- 🤝 **Collaboration**: Contributing as part of professional engineering teams
 
 </details>
 
@@ -152,7 +151,7 @@ I'm a developer who believes in building things that matter. Whether it's a smal
 
 ## 📈 Contribution Graph
 
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=IdoY12&theme=tokyonight" alt="Contribution Graph"/>
+![Contribution Graph](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=IdoY12&theme=tokyonight)
 
 ---
 
