@@ -159,56 +159,9 @@ I'm a developer who believes in building things that matter. Whether it's a smal
 
 ---
 
-## 🎯 Featured Projects
-
-<div align="center">
-
-<a href="https://github.com/IdoY12/your-best-project">
-  <img align="center" src="https://github-readme-stats-sigma-five.vercel.app/api/pin/?username=IdoY12&repo=your-best-project&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=00E5FF&text_color=c9d1d9" />
-</a>
-
-<a href="https://github.com/IdoY12/another-cool-project">
-  <img align="center" src="https://github-readme-stats-sigma-five.vercel.app/api/pin/?username=IdoY12&repo=another-cool-project&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=00E5FF&text_color=c9d1d9" />
-</a>
-
-</div>
-
----
-
 ## 📈 Contribution Graph
 
 <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=IdoY12&theme=tokyonight" alt="Contribution Graph"/>
-
----
-
-## 💼 What I'm Working On
-
-```javascript
-const currentProjects = {
-    professional: {
-        focus: "Building scalable web applications",
-        stack: ["React", "Node.js", "AWS", "MongoDB"],
-        methodology: "Agile / Scrum"
-    },
-    learning: {
-        topics: ["System Design", "Microservices", "Kubernetes"],
-        goal: "Architect enterprise-level solutions"
-    },
-    openSource: {
-        contributing: "Actively looking for interesting projects",
-        maintaining: "Personal libraries and tools"
-    }
-};
-```
-
----
-
-## 🎓 Certifications & Learning
-
-- 🎯 **AWS Certified Developer** (In Progress)
-- 📚 **System Design & Architecture** - Constantly learning
-- 🚀 **Advanced React Patterns** - Deep diving
-- 🐳 **Docker & Kubernetes** - Containerization mastery
 
 ---
 
@@ -216,15 +169,6 @@ const currentProjects = {
 
 <table>
 <tr>
-<td>
-
-🎮 **When I'm not coding:**
-- Gaming (strategy & RPGs)
-- Reading tech blogs & documentation
-- Contributing to open source
-- Learning new technologies
-
-</td>
 <td>
 
 ☕ **Developer Fuel:**
