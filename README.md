@@ -35,7 +35,7 @@
 <summary>📖 <b>More about my journey</b></summary>
 <br>
 
-Disciplined problem solver focused on writing code and solving problems through practice. Hands-on experience in web development with TypeScript and Node.js, along with growing exposure to AI, ML, and LLM technologies. Motivated to contribute value through reliable, well-structured solutions as part of professional engineering teams.
+Disciplined problem solver with hands-on experience in web development using TypeScript and Node.js. Growing exposure to AI, ML, and LLM technologies. Focused on delivering reliable, well-structured solutions.
 
 </details>
 
@@ -68,7 +68,6 @@ Disciplined problem solver focused on writing code and solving problems through 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![REST API](https://img.shields.io/badge/REST-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 </div>
