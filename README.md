@@ -5,7 +5,7 @@
 
 <!-- TYPING ANIMATION -->
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=00E5FF&center=true&vCenter=true&multiline=false&repeat=true&width=600&height=60&lines=Building+elegant+solutions+to+complex+problems;Passionate+about+clean+code+%26+scalable+architecture;Always+learning%2C+always+shipping+%F0%9F%9F%A2" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=00E5FF&center=true&vCenter=true&multiline=false&repeat=true&width=600&height=60&lines=Building+elegant+solutions+to+complex+problems;Passionate+about+clean+code+%26+scalable+architecture;Always+learning%2C+always+shipping+%F0%9F%9A%80" alt="Typing SVG" />
 </a>
 
 <!-- SOCIAL BADGES -->
@@ -35,9 +35,7 @@
 <summary>📖 <b>More about my journey</b></summary>
 <br>
 
-Disciplined problem solver with a strong technical mindset, focused on writing code and solving problems through practice. Surrounded by computers and technology from an early age, actively developing skills and exploring new tools while continuously deepening technical understanding through hands-on work.
-
-Hands-on experience in web application development with a primary focus on TypeScript and Node.js, and growing exposure to AI, ML, and LLM-based technologies. Experience includes delivering client-facing functionality, implementing server-side logic, integrating databases, developing REST APIs, and enabling real-time communication. Motivated to contribute value by developing reliable, well-structured solutions as part of professional engineering teams.
+Disciplined problem solver focused on writing code and solving problems through practice. Hands-on experience in web development with TypeScript and Node.js, along with growing exposure to AI, ML, and LLM technologies. Motivated to contribute value through reliable, well-structured solutions as part of professional engineering teams.
 
 </details>
 
@@ -71,7 +69,6 @@ Hands-on experience in web application development with a primary focus on TypeS
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![REST API](https://img.shields.io/badge/REST-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 </div>
