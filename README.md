@@ -37,18 +37,12 @@
 
 </div>
 
-<div align="center">
-  
-```typescript
-const ido = {
-    role: "Full-Stack Developer",
-    focus: ["Reliable", "Clean", "Scalable Web Applications"],
-    passion: "Open-source contributor",
-    mindset: "Always learning by doing"
-};
-```
-
-</div>
+<p align="center">
+  <samp>
+    Full-Stack Developer focused on building reliable, clean and scalable web applications.<br>
+    Active open-source contributor and always learning by doing.
+  </samp>
+</p>
 
 <br>
 
