@@ -39,7 +39,7 @@
 
 <p align="center">
   <samp>
-    Full-Stack Developer focused on building reliable, clean and scalable web applications.<br>
+    Software Developer focused on building reliable, clean and scalable web applications.<br>
     Active open-source contributor and always learning by doing.
   </samp>
 </p>
