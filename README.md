@@ -5,7 +5,7 @@
 
 <!-- TYPING ANIMATION -->
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=00E5FF&center=true&vCenter=true&multiline=false&repeat=true&width=600&height=60&lines=Building+elegant+solutions+to+complex+problems;Passionate+about+clean+code+%26+scalable+architecture;Always+learning%2C+always+shipping+%F0%9F%9A%80" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=00E5FF&center=true&vCenter=true&multiline=false&repeat=true&width=600&height=60&lines=Building+elegant+solutions+to+complex+problems;Passionate+about+clean+code+%26+scalable+architecture;Always+learning%2C+always+shipping+%F0%9F%9F%A2" alt="Typing SVG" />
 </a>
 
 <!-- SOCIAL BADGES -->
@@ -35,13 +35,9 @@
 <summary>📖 <b>More about my journey</b></summary>
 <br>
 
-Disciplined problem solver with a strong technical mindset, focused on writing code and solving problems through practice. Hands-on experience in web application development with TypeScript, Node.js, and growing exposure to AI, ML, and LLM technologies.
+Disciplined problem solver with a strong technical mindset, focused on writing code and solving problems through practice. Surrounded by computers and technology from an early age, actively developing skills and exploring new tools while continuously deepening technical understanding through hands-on work.
 
-**What drives me:**
-- 🚀 **Performance**: Writing efficient, reliable code
-- 🎨 **User Experience**: Delivering value through well-structured solutions
-- 📚 **Continuous Learning**: Deepening technical understanding through hands-on work
-- 🤝 **Collaboration**: Contributing as part of professional engineering teams
+Hands-on experience in web application development with a primary focus on TypeScript and Node.js, and growing exposure to AI, ML, and LLM-based technologies. Experience includes delivering client-facing functionality, implementing server-side logic, integrating databases, developing REST APIs, and enabling real-time communication. Motivated to contribute value by developing reliable, well-structured solutions as part of professional engineering teams.
 
 </details>
 
@@ -156,11 +152,6 @@ Disciplined problem solver with a strong technical mindset, focused on writing c
 ---
 
 <div align="center">
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Let's_Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/idoyahav/)
-[![Email](https://img.shields.io/badge/Email-Drop_a_Line-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:idoyahav15@gmail.com)
-
----
 
 <img src="https://komarev.com/ghpvc/?username=IdoY12&color=00E5FF&style=for-the-badge&label=PROFILE+VIEWS" alt="Profile Views"/>
 
