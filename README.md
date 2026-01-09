@@ -16,17 +16,7 @@
   <a href="mailto:idoyahav15@gmail.com">
     <img src="https://img.shields.io/badge/Email-Contact-EA4335?style=for-the-badge&logo=gmail&logoColor=white&labelColor=EA4335" alt="Email"/>
   </a>
-  <a href="https://github.com/IdoY12">
-    <img src="https://img.shields.io/github/followers/IdoY12?label=Followers&style=for-the-badge&color=00E5FF&labelColor=1a1b27" alt="GitHub Followers"/>
-  </a>
 </p>
-
-<!-- SNAKE ANIMATION -->
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/IdoY12/IdoY12/output/github-contribution-grid-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/IdoY12/IdoY12/output/github-contribution-grid-snake.svg">
-  <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/IdoY12/IdoY12/output/github-contribution-grid-snake.svg">
-</picture>
 
 </div>
 
@@ -73,7 +63,6 @@ I'm a developer who believes in building things that matter. Whether it's a smal
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 
 </div>
 </td>
@@ -101,7 +90,6 @@ I'm a developer who believes in building things that matter. Whether it's a smal
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
@@ -119,12 +107,23 @@ I'm a developer who believes in building things that matter. Whether it's a smal
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
-![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
-![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 ![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+
+</div>
+</td>
+</tr>
+
+<tr>
+<td colspan="3">
+
+### 🤖 AI & Machine Learning
+<div align="center">
+
+![AI](https://img.shields.io/badge/AI-00D9FF?style=for-the-badge&logo=artificial-intelligence&logoColor=white)
+![LLM](https://img.shields.io/badge/LLM-FF6B6B?style=for-the-badge&logo=openai&logoColor=white)
+![ML](https://img.shields.io/badge/ML-FF9500?style=for-the-badge&logo=tensorflow&logoColor=white)
 
 </div>
 </td>
@@ -147,9 +146,6 @@ I'm a developer who believes in building things that matter. Whether it's a smal
 <!-- ACTIVITY GRAPH -->
 <img src="https://github-readme-activity-graph.vercel.app/graph?username=IdoY12&theme=tokyo-night&hide_border=true&bg_color=0D1117&color=00E5FF&line=00E5FF&point=FFFFFF" alt="Contribution Graph"/>
 
-<!-- TROPHIES -->
-<img src="https://github-profile-trophy.vercel.app/?username=IdoY12&theme=tokyonight&no-frame=true&no-bg=true&margin-w=4&column=7" alt="GitHub Trophies"/>
-
 </div>
 
 ---
@@ -160,15 +156,10 @@ I'm a developer who believes in building things that matter. Whether it's a smal
 
 ---
 
-## 📫 Let's Connect & Collaborate
-
 <div align="center">
-
-I'm always interested in hearing about new projects, opportunities, and tech discussions. Whether you want to collaborate on a project, need help with something, or just want to chat about technology — feel free to reach out!
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Let's_Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/idoyahav/)
 [![Email](https://img.shields.io/badge/Email-Drop_a_Line-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:idoyahav15@gmail.com)
-[![Portfolio](https://img.shields.io/badge/Portfolio-View_My_Work-00E5FF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://your-portfolio.com)
 
 ---
 
