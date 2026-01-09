@@ -68,6 +68,7 @@ Disciplined problem solver with hands-on experience in web development using Typ
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![REST API](https://img.shields.io/badge/REST-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 </div>
@@ -101,17 +102,6 @@ Disciplined problem solver with hands-on experience in web development using Typ
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 ![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
-
-</div>
-</td>
-</tr>
-
-<tr>
-<td colspan="3">
-
-### 🤖 AI & Machine Learning
-<div align="center">
-
 ![AI](https://img.shields.io/badge/AI-00D9FF?style=for-the-badge&logo=artificial-intelligence&logoColor=white)
 ![LLM](https://img.shields.io/badge/LLM-FF6B6B?style=for-the-badge&logo=openai&logoColor=white)
 ![ML](https://img.shields.io/badge/ML-FF9500?style=for-the-badge&logo=tensorflow&logoColor=white)
