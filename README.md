@@ -40,6 +40,7 @@
 <td valign="top" width="33%">
 
 ### 🎨 Frontend
+
 <div align="center">
   
 <p align="center">
@@ -49,11 +50,12 @@
 </p>
 
 </div>
-</td>
 
+</td>
 <td valign="top" width="33%">
 
 ### ⚙️ Backend
+
 <div align="center">
 
 <p align="center">
@@ -63,11 +65,12 @@
 </p>
 
 </div>
-</td>
 
+</td>
 <td valign="top" width="33%">
 
 ### 💾 Data & Cloud
+
 <div align="center">
 
 <p align="center">
@@ -77,13 +80,14 @@
 </p>
 
 </div>
+
 </td>
 </tr>
-
 <tr>
 <td colspan="3">
 
 ### 🔧 Tools & Workflow
+
 <div align="center">
 
 <p align="center">
@@ -93,6 +97,7 @@
 </p>
 
 </div>
+
 </td>
 </tr>
 </table>
