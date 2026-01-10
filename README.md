@@ -50,7 +50,11 @@ Disciplined problem solver with hands-on experience in web development using Typ
 ### 🎨 Frontend
 <div align="center">
   
-<img src="https://skillicons.dev/icons?i=js,ts,react,html,css,tailwind&theme=dark" alt="Frontend Skills" />
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=js,ts,react,html,css,tailwind" />
+  </a>
+</p>
 
 </div>
 </td>
@@ -60,14 +64,22 @@ Disciplined problem solver with hands-on experience in web development using Typ
 ### ⚙️ Backend
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=nodejs,express,python,flask&theme=dark" alt="Backend Skills" />
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=nodejs,express,python,flask" />
+  </a>
+</p>
 
-<br><br>
+<br>
 
-![REST API](https://img.shields.io/badge/REST_API-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
-![AI](https://img.shields.io/badge/AI-00D9FF?style=for-the-badge&logo=openai&logoColor=white)
-![LLM](https://img.shields.io/badge/LLM-FF6B6B?style=for-the-badge&logo=anthropic&logoColor=white)
-![ML](https://img.shields.io/badge/ML-FF9500?style=for-the-badge&logo=tensorflow&logoColor=white)
+<p align="center">
+  <img src="https://img.shields.io/badge/REST_API-FF6C37?style=for-the-badge&logo=postman&logoColor=white&labelColor=FF6C37" />
+  <img src="https://img.shields.io/badge/AI-00D9FF?style=for-the-badge&logo=openai&logoColor=white&labelColor=00D9FF" />
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/LLM-FF6B6B?style=for-the-badge&logo=anthropic&logoColor=white&labelColor=FF6B6B" />
+  <img src="https://img.shields.io/badge/ML-FF9500?style=for-the-badge&logo=tensorflow&logoColor=white&labelColor=FF9500" />
+</p>
 
 </div>
 </td>
@@ -77,7 +89,11 @@ Disciplined problem solver with hands-on experience in web development using Typ
 ### 💾 Data & Cloud
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=mongodb,mysql,postgres,aws,docker&theme=dark" alt="Data & Cloud Skills" />
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=mongodb,mysql,postgres,aws,docker" />
+  </a>
+</p>
 
 </div>
 </td>
@@ -89,7 +105,11 @@ Disciplined problem solver with hands-on experience in web development using Typ
 ### 🔧 Tools & Workflow
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=git,github,vscode,postman,vite,npm,nginx&theme=dark" alt="Tools & Workflow" />
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=git,github,vscode,postman,vite,npm,nginx" />
+  </a>
+</p>
 
 </div>
 </td>
