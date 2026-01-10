@@ -40,7 +40,6 @@
 <td valign="top" width="33%">
 
 ### 🎨 Frontend
-
 <div align="center">
   
 <p align="center">
@@ -50,12 +49,11 @@
 </p>
 
 </div>
-
 </td>
+
 <td valign="top" width="33%">
 
 ### ⚙️ Backend
-
 <div align="center">
 
 <p align="center">
@@ -65,12 +63,11 @@
 </p>
 
 </div>
-
 </td>
+
 <td valign="top" width="33%">
 
 ### 💾 Data & Cloud
-
 <div align="center">
 
 <p align="center">
@@ -80,24 +77,22 @@
 </p>
 
 </div>
-
 </td>
 </tr>
+
 <tr>
 <td colspan="3">
 
 ### 🔧 Tools & Workflow
-
 <div align="center">
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=git,github,vscode,postman,vite,npm,nginx,flask" />
+    <img src="https://skillicons.dev/icons?i=git,github,vscode,postman,vite,npm,nginx" />
   </a>
 </p>
 
 </div>
-
 </td>
 </tr>
 </table>
