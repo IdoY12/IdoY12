@@ -23,11 +23,11 @@
 ---
 
 
-<p align="center">
+<h3 align="center">
   <samp>
-    ## Software Developer | Clean code | Learning by doing
+    Software Developer | Clean code | Learning by doing
   </samp>
-</p>
+</h3>
 
 ---
 
