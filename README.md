@@ -22,12 +22,10 @@
 
 ---
 
-## 🎯 About Me
 
 <p align="center">
   <samp>
-    Software Developer focused on building reliable, clean and scalable web applications.<br>
-    Active open source contributor and always learning by doing.
+    ## Software Developer | Clean code | Learning by doing
   </samp>
 </p>
 
