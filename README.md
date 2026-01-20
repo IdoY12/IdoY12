@@ -75,7 +75,7 @@
 
 <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=mongodb,mysql,postgres,aws,docker" />
+    <img src="https://skillicons.dev/icons?i=mongodb,mysql,redis,postgres,aws,docker" />
   </a>
 </p>
 
