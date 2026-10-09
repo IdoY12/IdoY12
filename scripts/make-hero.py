@@ -481,7 +481,7 @@ def build_hero():
     p = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
         f'shape-rendering="crispEdges" role="img" '
-        f'aria-label="Hello there - Ido Yahav, full-stack developer. A night march of pixel knights, '
+        f'aria-label="Hello there. A night march of pixel knights, '
         f'dragons and other characters, each dressed as a technology.">'
     ]
     p.append(
@@ -516,7 +516,7 @@ def build_hero():
         f'<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">'
         f'<stop offset="0" stop-color="#05030f"/><stop offset=".45" stop-color="#150a2e"/>'
         f'<stop offset=".8" stop-color="#2a0c3a"/><stop offset="1" stop-color="#1a0b33"/></linearGradient>'
-        f'<linearGradient id="title" gradientUnits="userSpaceOnUse" x1="250" y1="0" x2="900" y2="0">'
+        f'<linearGradient id="title" gradientUnits="userSpaceOnUse" x1="180" y1="0" x2="1020" y2="0">'
         f'<stop offset="0" stop-color="#5eead4"/><stop offset=".5" stop-color="#c4b5fd"/>'
         f'<stop offset="1" stop-color="#f472b6"/></linearGradient></defs>'
     )
@@ -524,20 +524,17 @@ def build_hero():
 
     # ---- title ---------------------------------------------------------------
     title = "HELLO THERE"
-    tw_ = text_width(title, 10)
-    tx = (W - tw_) // 2 - 20
-    for dx, dy in ((-4, 0), (4, 0), (0, -4), (0, 4), (6, 6)):
-        t, _ = text_pixels(title, tx + dx, 20 + dy, 10, INK)
-        p.append(t)
-    t, _ = text_pixels(title, tx, 20, 10, "url(#title)")
-    p.append(t)
-    p.append(rect(tx + tw_ + 16, 20, 36, 70, "#5eead4", ' class="cur"'))
-    sub = "IDO YAHAV . FULL-STACK DEVELOPER"
-    sw = text_width(sub, 4)
-    t, _ = text_pixels(sub, (W - sw) // 2 + 3, 107, 4, INK)
-    p.append(t)
-    t, _ = text_pixels(sub, (W - sw) // 2, 104, 4, "#e9d5ff")
-    p.append(t)
+    tpx, bold = 11, 6  # glyph pixel size; every stroke is thickened by `bold` px for legibility
+    tw_ = text_width(title, tpx, gap=2) + bold
+    tx, ty = (W - tw_) // 2 - 24, 34
+
+    def strike(dx, dy, fill):
+        return "".join(text_pixels(title, tx + dx + k, ty + dy, tpx, fill, gap=2)[0] for k in (0, bold))
+
+    for dx, dy in ((-5, 0), (5, 0), (0, -5), (0, 5), (-5, -5), (5, -5), (-5, 5), (8, 8)):
+        p.append(strike(dx, dy, INK))
+    p.append(strike(0, 0, "url(#title)"))
+    p.append(rect(tx + tw_ + 18, ty, 40, 7 * tpx, "#5eead4", ' class="cur"'))
 
     # ---- world ---------------------------------------------------------------
     p.append(hills())
