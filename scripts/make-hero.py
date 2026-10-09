@@ -1,393 +1,296 @@
 #!/usr/bin/env python3
 """
-Generates the animated pixel-art SVG used in the profile README:
-  assets/hero.svg  - arcade "level" banner with an original sprite
+Generates the animated fantasy banner used in the profile README:
+  assets/hero.svg  - a dreamlike "other world" landscape: rainbow light rays,
+                     floating islands with waterfalls, a crystal spire, glowing
+                     flora and a "Hello there" greeting.
 
-Everything is self-contained: no external fonts (GitHub strips them from
-SVGs), every glyph is a 5x7 bitmap, and all motion is plain CSS keyframes,
-which GitHub renders inside <img> tags.
+Everything is self-contained: no external fonts or images (GitHub strips them
+from SVGs), and all motion is plain CSS keyframes / SMIL, which GitHub renders
+inside <img> tags.
 
 Run: python3 scripts/make-hero.py
 """
+import math
+import random
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-
-# 5x7 bitmap font. '1' = lit pixel.
-FONT = {
-    "A": ["01110", "10001", "10001", "11111", "10001", "10001", "10001"],
-    "B": ["11110", "10001", "10001", "11110", "10001", "10001", "11110"],
-    "C": ["01111", "10000", "10000", "10000", "10000", "10000", "01111"],
-    "D": ["11110", "10001", "10001", "10001", "10001", "10001", "11110"],
-    "E": ["11111", "10000", "10000", "11110", "10000", "10000", "11111"],
-    "F": ["11111", "10000", "10000", "11110", "10000", "10000", "10000"],
-    "G": ["01111", "10000", "10000", "10111", "10001", "10001", "01111"],
-    "H": ["10001", "10001", "10001", "11111", "10001", "10001", "10001"],
-    "I": ["11111", "00100", "00100", "00100", "00100", "00100", "11111"],
-    "J": ["00111", "00010", "00010", "00010", "00010", "10010", "01100"],
-    "K": ["10001", "10010", "10100", "11000", "10100", "10010", "10001"],
-    "L": ["10000", "10000", "10000", "10000", "10000", "10000", "11111"],
-    "M": ["10001", "11011", "10101", "10101", "10001", "10001", "10001"],
-    "N": ["10001", "11001", "10101", "10011", "10001", "10001", "10001"],
-    "O": ["01110", "10001", "10001", "10001", "10001", "10001", "01110"],
-    "P": ["11110", "10001", "10001", "11110", "10000", "10000", "10000"],
-    "Q": ["01110", "10001", "10001", "10001", "10101", "10010", "01101"],
-    "R": ["11110", "10001", "10001", "11110", "10100", "10010", "10001"],
-    "S": ["01111", "10000", "10000", "01110", "00001", "00001", "11110"],
-    "T": ["11111", "00100", "00100", "00100", "00100", "00100", "00100"],
-    "U": ["10001", "10001", "10001", "10001", "10001", "10001", "01110"],
-    "V": ["10001", "10001", "10001", "10001", "10001", "01010", "00100"],
-    "W": ["10001", "10001", "10001", "10101", "10101", "10101", "01010"],
-    "X": ["10001", "10001", "01010", "00100", "01010", "10001", "10001"],
-    "Y": ["10001", "10001", "01010", "00100", "00100", "00100", "00100"],
-    "Z": ["11111", "00001", "00010", "00100", "01000", "10000", "11111"],
-    "0": ["01110", "10001", "10011", "10101", "11001", "10001", "01110"],
-    "1": ["00100", "01100", "00100", "00100", "00100", "00100", "01110"],
-    "2": ["01110", "10001", "00001", "00010", "00100", "01000", "11111"],
-    "3": ["11110", "00001", "00001", "01110", "00001", "00001", "11110"],
-    "4": ["00010", "00110", "01010", "10010", "11111", "00010", "00010"],
-    "5": ["11111", "10000", "11110", "00001", "00001", "10001", "01110"],
-    "6": ["01110", "10000", "10000", "11110", "10001", "10001", "01110"],
-    "7": ["11111", "00001", "00010", "00100", "01000", "01000", "01000"],
-    "8": ["01110", "10001", "10001", "01110", "10001", "10001", "01110"],
-    "9": ["01110", "10001", "10001", "01111", "00001", "00001", "01110"],
-    " ": ["00000"] * 7,
-    ".": ["00000", "00000", "00000", "00000", "00000", "01100", "01100"],
-    ",": ["00000", "00000", "00000", "00000", "01100", "00100", "01000"],
-    ":": ["00000", "01100", "01100", "00000", "01100", "01100", "00000"],
-    "-": ["00000", "00000", "00000", "11111", "00000", "00000", "00000"],
-    "/": ["00001", "00010", "00010", "00100", "01000", "01000", "10000"],
-    ">": ["10000", "01000", "00100", "00010", "00100", "01000", "10000"],
-    "<": ["00001", "00010", "00100", "01000", "00100", "00010", "00001"],
-    "_": ["00000", "00000", "00000", "00000", "00000", "00000", "11111"],
-    "+": ["00000", "00100", "00100", "11111", "00100", "00100", "00000"],
-    "|": ["00100"] * 7,
-    "@": ["01110", "10001", "10111", "10101", "10111", "10000", "01110"],
-    "#": ["01010", "01010", "11111", "01010", "11111", "01010", "01010"],
-    "{": ["00110", "01000", "01000", "11000", "01000", "01000", "00110"],
-    "}": ["01100", "00010", "00010", "00011", "00010", "00010", "01100"],
-    "(": ["00010", "00100", "01000", "01000", "01000", "00100", "00010"],
-    ")": ["01000", "00100", "00010", "00010", "00010", "00100", "01000"],
-    "!": ["00100", "00100", "00100", "00100", "00100", "00000", "00100"],
-    "?": ["01110", "10001", "00001", "00010", "00100", "00000", "00100"],
-    "'": ["00100", "00100", "00000", "00000", "00000", "00000", "00000"],
-    "=": ["00000", "00000", "11111", "00000", "11111", "00000", "00000"],
-    "*": ["00000", "10101", "01110", "11111", "01110", "10101", "00000"],
-    "$": ["00100", "01111", "10100", "01110", "00101", "11110", "00100"],
-    "~": ["00000", "00000", "01000", "10101", "00010", "00000", "00000"],
-    # custom glyphs
-    "♥": ["01010", "11111", "11111", "11111", "01110", "00100", "00000"],  # heart
-    "★": ["00100", "00100", "11111", "01110", "01110", "01010", "00000"],  # star
-}
+W, H = 1200, 420
+RAINBOW = ["#ff6b6b", "#ffa94d", "#ffe066", "#8ce99a", "#66d9e8", "#748ffc", "#b197fc", "#f783ac"]
+rnd = random.Random(11)
 
 
-def text_width(text, px, gap=1):
-    return len(text) * (5 + gap) * px - gap * px
+def rays(cx, cy):
+    """Rainbow light wedges fanning out of the sky crystal, slowly rotating."""
+    out = [f'<g transform="translate({cx},{cy})"><g class="pulse"><g>']
+    out.append(
+        '<animateTransform attributeName="transform" type="rotate" from="0" to="360" '
+        'dur="240s" repeatCount="indefinite"/>'
+    )
+    n = 32
+    for i in range(n):
+        a0 = 2 * math.pi * i / n
+        a1 = 2 * math.pi * (i + 0.62) / n
+        r = 1400
+        pts = f"0,0 {r*math.cos(a0):.0f},{r*math.sin(a0):.0f} {r*math.cos(a1):.0f},{r*math.sin(a1):.0f}"
+        out.append(f'<polygon points="{pts}" fill="{RAINBOW[i % len(RAINBOW)]}" fill-opacity=".30"/>')
+    out.append("</g></g></g>")
+    return "".join(out)
 
 
-def text_pixels(text, x, y, px, fill, gap=1, extra=""):
-    """Returns SVG rects for `text`, top-left at (x, y), pixel size px."""
-    out = []
-    cx = x
-    for ch in text.upper():
-        glyph = FONT.get(ch, FONT["?"])
-        for row, bits in enumerate(glyph):
-            # merge horizontal runs into single rects to keep files small
-            col = 0
-            while col < 5:
-                if bits[col] == "1":
-                    start = col
-                    while col < 5 and bits[col] == "1":
-                        col += 1
-                    out.append(
-                        f'<rect x="{cx + start * px}" y="{y + row * px}" '
-                        f'width="{(col - start) * px}" height="{px}" fill="{fill}"{extra}/>'
-                    )
-                else:
-                    col += 1
-        cx += (5 + gap) * px
-    return "\n".join(out), cx
+def stars():
+    out = ['<g class="stars">']
+    for _ in range(70):
+        x, y = rnd.uniform(0, W), rnd.uniform(0, 210)
+        r = rnd.choice([0.9, 1.2, 1.6, 2.1])
+        out.append(
+            f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r}" fill="#fff" '
+            f'style="animation-delay:-{rnd.uniform(0, 4):.2f}s"/>'
+        )
+    out.append("</g>")
+    return "".join(out)
 
 
-def sprite_pixels(rows, x, y, px, palette, extra=""):
-    """rows: list of strings; each char maps to a color in palette ('.' = transparent)."""
-    out = []
-    for r, line in enumerate(rows):
-        c = 0
-        while c < len(line):
-            ch = line[c]
-            if ch == ".":
-                c += 1
-                continue
-            start = c
-            while c < len(line) and line[c] == ch:
-                c += 1
+def rainbow_arc(cx, cy, r0):
+    out = ['<g fill="none" stroke-width="7" opacity=".55" filter="url(#soft)">']
+    for i, c in enumerate(RAINBOW[:7]):
+        r = r0 - i * 7
+        out.append(f'<path d="M{cx - r},{cy} A{r},{r} 0 0 1 {cx + r},{cy}" stroke="{c}"/>')
+    out.append("</g>")
+    return "".join(out)
+
+
+def island(x, y, w, falls, cls):
+    """Floating island: mossy top, violet rock underside, waterfalls to the ground."""
+    h = w * 0.42
+    out = [f'<g class="{cls}">']
+    for fx, fw in falls:  # waterfalls (drawn first so the rim overlaps them)
+        top = y + 4
+        out.append(f'<rect x="{x + fx}" y="{top}" width="{fw}" height="{H - top}" fill="url(#fall)"/>')
+        for k in range(3):
+            lx = x + fx + fw * (k + 0.5) / 3
             out.append(
-                f'<rect x="{x + start * px}" y="{y + r * px}" width="{(c - start) * px}" '
-                f'height="{px}" fill="{palette[ch]}"{extra}/>'
+                f'<line class="flow" x1="{lx:.0f}" y1="{top}" x2="{lx:.0f}" y2="{H}" stroke="#fff" '
+                f'stroke-opacity=".8" stroke-width="2" stroke-dasharray="14 22" '
+                f'style="animation-delay:-{k * 0.4:.1f}s"/>'
             )
-    return "\n".join(out)
+    out.append(
+        f'<path d="M{x},{y} C{x + w * .1},{y + h * .7} {x + w * .32},{y + h} {x + w * .45},{y + h * 1.05} '
+        f'C{x + w * .62},{y + h * .95} {x + w * .9},{y + h * .5} {x + w},{y} Z" fill="url(#rock)"/>'
+    )
+    out.append(f'<ellipse cx="{x + w / 2}" cy="{y}" rx="{w / 2}" ry="{w * .075}" fill="url(#moss)"/>')
+    out.append(
+        f'<ellipse cx="{x + w / 2}" cy="{y - w * .02}" rx="{w * .4}" ry="{w * .04}" fill="#f4ff9a" fill-opacity=".45"/>'
+    )
+    return out
 
 
-# ---------------------------------------------------------------------------
-# Palette (arcade neon)
-# ---------------------------------------------------------------------------
-BG = "#0a0a14"
-GRID = "#12122a"
-PURPLE = "#a855f7"
-PURPLE_DK = "#6d28d9"
-CYAN = "#22d3ee"
-PINK = "#f472b6"
-YELLOW = "#fde047"
-GREEN = "#4ade80"
-WHITE = "#f1f5f9"
-GRAY = "#64748b"
-LIGHT = "#cbd5e1"
+def spire(x, y):
+    """Crystal spire with a halo ring, glowing tip and a beam of light."""
+    return (
+        f'<rect x="{x - 5}" y="0" width="10" height="{y - 118}" fill="url(#beam)" class="pulse"/>'
+        f'<polygon points="{x - 15},{y} {x},{y - 120} {x + 15},{y}" fill="url(#crystal)"/>'
+        f'<polygon points="{x},{y - 120} {x + 15},{y} {x + 3},{y}" fill="#fff" fill-opacity=".35"/>'
+        f'<polygon points="{x - 30},{y} {x - 22},{y - 44} {x - 13},{y}" fill="url(#crystal)" opacity=".85"/>'
+        f'<polygon points="{x + 12},{y} {x + 23},{y - 34} {x + 31},{y}" fill="url(#crystal)" opacity=".85"/>'
+        f'<ellipse cx="{x}" cy="{y - 70}" rx="34" ry="8" fill="none" stroke="#ffe066" stroke-width="4" '
+        f'class="pulse" filter="url(#soft)"/>'
+        f'<circle cx="{x}" cy="{y - 122}" r="20" fill="url(#glow)" class="pulse"/>'
+        f'<circle cx="{x}" cy="{y - 122}" r="4.5" fill="#fff"/>'
+    )
 
-# ---------------------------------------------------------------------------
-# The sprite: "BYTE" - an original pixel creature. One wide visor eye, an antenna
-# with a blinking tip, a dome body and a three-pixel thruster tail.
-# Legend: b=body p=body shade v=visor w=visor glint a=antenna t=thruster
-# ---------------------------------------------------------------------------
-BYTE = [
-    "......a......",
-    "......a......",
-    ".....bbb.....",
-    "...bbbbbbb...",
-    "..bbbbbbbbb..",
-    ".bbvvvvvvvbb.",
-    ".bbvwvvvvvbb.",
-    ".bbvvvvvvvbb.",
-    ".bbbbbbbbbbb.",
-    ".bbbbbbbbbbb.",
-    "..pbbbbbbbp..",
-    "...pp.p.pp...",
-    "....t.t.t....",
-]
-BYTE_PAL = {"b": PURPLE, "p": PURPLE_DK, "v": CYAN, "w": WHITE, "a": PURPLE_DK, "t": PINK}
 
-# Collectibles: small 7x7 pixel icons the sprite "picks up"
-ICON_CODE = [  # </>
-    ".......",
-    ".1...1.",
-    "1.....1",
-    "1..2..1",
-    "1.....1",
-    ".1...1.",
-    ".......",
-]
-ICON_DB = [  # database cylinder
-    ".11111.",
-    "1.....1",
-    ".11111.",
-    "1.....1",
-    ".11111.",
-    "1.....1",
-    ".11111.",
-]
-ICON_CLOUD = [
-    ".......",
-    "...11..",
-    "..1..1.",
-    ".1....1",
-    "1......",
-    "1111111",
-    ".......",
-]
-ICON_MOBILE = [
-    ".11111.",
-    ".1...1.",
-    ".1...1.",
-    ".1...1.",
-    ".1...1.",
-    ".11.11.",
-    ".11111.",
-]
-ICON_BOLT = [
-    "...11..",
-    "..11...",
-    ".11....",
-    "1111111",
-    "....11.",
-    "...11..",
-    "..11...",
-]
+def castle(x, y):
+    """Faint castle in the clouds."""
+    p = [f'<g fill="#fff" opacity=".7" filter="url(#soft)">']
+    for dx, w, h in ((0, 16, 34), (20, 22, 52), (46, 14, 40), (64, 20, 28), (-20, 16, 22)):
+        p.append(f'<rect x="{x + dx}" y="{y - h}" width="{w}" height="{h}"/>')
+        p.append(f'<polygon points="{x + dx - 2},{y - h} {x + dx + w / 2},{y - h - 22} {x + dx + w + 2},{y - h}"/>')
+    p.append(f'<ellipse cx="{x + 32}" cy="{y + 2}" rx="80" ry="10"/>')
+    p.append("</g>")
+    return "".join(p)
+
+
+def tendril(x, y, s, flip=False):
+    """Curling alien leaf, swaying."""
+    sx = -s if flip else s
+    return (
+        f'<g transform="translate({x},{y}) scale({sx},{s})"><g class="sway">'
+        '<path d="M0,0 C10,-70 -30,-120 20,-180 C48,-212 92,-196 84,-164 C78,-146 56,-150 60,-166 '
+        'C40,-150 22,-112 30,-60 C34,-34 22,-12 14,0 Z" fill="url(#leaf)" stroke="#1f6b3a" stroke-width="2"/>'
+        '<path d="M6,-4 C16,-70 -14,-118 28,-172" fill="none" stroke="#eaffb0" stroke-opacity=".7" stroke-width="2"/>'
+        "</g></g>"
+    )
+
+
+def bulb(x, y, s):
+    """Purple pod flower with glowing seeds."""
+    dots = "".join(
+        f'<circle cx="{dx}" cy="{dy}" r="4" fill="#ffe066" class="tw" style="animation-delay:-{i * .5:.1f}s"/>'
+        for i, (dx, dy) in enumerate(((-14, -30), (0, -40), (14, -30), (-8, -16), (8, -16)))
+    )
+    return (
+        f'<g transform="translate({x},{y}) scale({s})">'
+        '<path d="M0,0 C-44,-10 -40,-58 0,-88 C40,-58 44,-10 0,0 Z" fill="url(#pod)" stroke="#4a1d7a" stroke-width="2"/>'
+        '<path d="M0,-88 C-6,-104 6,-112 14,-120" fill="none" stroke="#4a1d7a" stroke-width="3"/>'
+        f"{dots}</g>"
+    )
+
+
+def jelly(x, y, s, d):
+    """Floating luminous seed (drifts up and down)."""
+    lines = "".join(
+        f'<path d="M{dx},0 q{4 if i % 2 else -4},14 0,{26 + (i % 3) * 6}" fill="none" stroke="#e5b8ff" '
+        f'stroke-opacity=".8" stroke-width="1.5"/>'
+        for i, dx in enumerate((-12, -6, 0, 6, 12))
+    )
+    return (
+        f'<g transform="translate({x},{y}) scale({s})"><g class="drift" style="animation-delay:-{d}s">'
+        '<circle r="26" cy="-6" fill="url(#glowp)"/>'
+        '<path d="M-18,0 C-18,-24 18,-24 18,0 Z" fill="#d6a4ff" fill-opacity=".9"/>'
+        f"{lines}</g></g>"
+    )
 
 
 def build_hero():
-    W, H = 1200, 334
-    px = 4
-    parts = []
-    parts.append(
+    p = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
-        f'shape-rendering="crispEdges" role="img" aria-label="Hello there - Ido Yahav, full-stack developer">'
-    )
-
-    # ---- styles / animations -------------------------------------------------
-    parts.append(
+        f'role="img" aria-label="Hello there - I\'m Ido Yahav, full-stack developer">'
+    ]
+    p.append(
         """<style>
-@keyframes blink { 0%,49% { opacity:1 } 50%,100% { opacity:0 } }
-@keyframes tip { 0%,100% { fill:#f472b6 } 50% { fill:#fde047 } }
-@keyframes float { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-10px) } }
-@keyframes thrust { 0%,100% { opacity:1 } 50% { opacity:.25 } }
-@keyframes visor { 0%,40% { transform:translateX(0) } 50%,90% { transform:translateX(12px) } 100% { transform:translateX(0) } }
-@keyframes walk { 0% { transform:translateX(0) } 100% { transform:translateX(980px) } }
-@keyframes scroll { 0% { transform:translateX(0) } 100% { transform:translateX(-64px) } }
-@keyframes twinkle { 0%,100% { opacity:.2 } 50% { opacity:1 } }
-@keyframes glow { 0%,100% { opacity:.55 } 50% { opacity:1 } }
-@keyframes shine { 0% { transform:translateX(-200px) } 100% { transform:translateX(1400px) } }
-.blink { animation: blink 1s steps(1) infinite }
-.tip { animation: tip .6s steps(1) infinite }
-.byte { animation: walk 12s linear infinite }
-.bob { animation: float 1.6s ease-in-out infinite }
-.thr { animation: thrust .3s steps(1) infinite }
-.vis { animation: visor 3s steps(1) infinite }
-.stars rect { animation: twinkle 2.4s ease-in-out infinite }
-.glow { animation: glow 2s ease-in-out infinite }
-.shine { animation: shine 9s linear infinite }
+@keyframes tw { 0%,100% { opacity:.25 } 50% { opacity:1 } }
+@keyframes pulse { 0%,100% { opacity:.7 } 50% { opacity:1 } }
+@keyframes bobA { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-8px) } }
+@keyframes bobB { 0%,100% { transform:translateY(-6px) } 50% { transform:translateY(4px) } }
+@keyframes drift { 0%,100% { transform:translate(0,0) } 50% { transform:translate(10px,-22px) } }
+@keyframes flow { to { stroke-dashoffset:-36 } }
+@keyframes sway { 0%,100% { transform:rotate(-2.5deg) } 50% { transform:rotate(3deg) } }
+@keyframes fly { 0% { transform:translate(0,0); opacity:0 } 15%,80% { opacity:1 } 100% { transform:translate(40px,-120px); opacity:0 } }
+@keyframes cloud { from { transform:translateX(-260px) } to { transform:translateX(1460px) } }
+.stars circle, .tw { animation: tw 3.2s ease-in-out infinite }
+.pulse { animation: pulse 4s ease-in-out infinite }
+.ia { animation: bobA 7s ease-in-out infinite }
+.ib { animation: bobB 9s ease-in-out infinite }
+.drift { animation: drift 8s ease-in-out infinite }
+.flow { animation: flow 1.1s linear infinite }
+.sway { animation: sway 6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100% }
+.fly { animation: fly 9s linear infinite }
+.cloud { animation: cloud 90s linear infinite }
+.t { font-family: Georgia, 'Times New Roman', serif; text-anchor: middle; paint-order: stroke; stroke-linejoin: round }
 </style>"""
     )
-    # pickups: each vanishes when the sprite reaches it, +100 pops, respawn at loop end
-    pickup_x = [180, 340, 500, 660, 820]
-    for i, x in enumerate(pickup_x):
-        # sprite starts at x=60; reaches pickup when translateX ~= x-60 -> t = (x-60)/980*12s
-        t = (x - 60) / 980 * 12
-        p = t / 12 * 100
-        parts.append(
-            f"<style>@keyframes pk{i} {{ 0%,{p:.1f}% {{ opacity:1 }} {p+0.1:.1f}%,100% {{ opacity:0 }} }}"
-            f"@keyframes pop{i} {{ 0%,{p:.1f}% {{ opacity:0; transform:translateY(0) }} {p+0.1:.1f}% {{ opacity:1; transform:translateY(0) }} "
-            f"{min(p+8,100):.1f}%,100% {{ opacity:0; transform:translateY(-28px) }} }}"
-            f".pk{i} {{ animation: pk{i} 12s steps(1) infinite }} .pop{i} {{ animation: pop{i} 12s linear infinite }}</style>"
+    p.append(
+        """<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#1a1160"/><stop offset=".38" stop-color="#5a2ea6"/>
+<stop offset=".66" stop-color="#d45c9c"/><stop offset=".84" stop-color="#ffb37a"/><stop offset="1" stop-color="#ffe9b0"/>
+</linearGradient>
+<radialGradient id="glow"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#fff7c2" stop-opacity=".85"/><stop offset="1" stop-color="#fff7c2" stop-opacity="0"/></radialGradient>
+<radialGradient id="glowp"><stop offset="0" stop-color="#e9c6ff" stop-opacity=".9"/><stop offset="1" stop-color="#b56cff" stop-opacity="0"/></radialGradient>
+<radialGradient id="veil"><stop offset="0" stop-color="#140a3c" stop-opacity=".55"/><stop offset="1" stop-color="#140a3c" stop-opacity="0"/></radialGradient>
+<linearGradient id="far" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1fbff"/><stop offset="1" stop-color="#b9e4dc"/></linearGradient>
+<linearGradient id="mid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a8ecc0"/><stop offset="1" stop-color="#59c08a"/></linearGradient>
+<linearGradient id="near" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9ee5a"/><stop offset="1" stop-color="#2f9a4a"/></linearGradient>
+<linearGradient id="moss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6f76a"/><stop offset="1" stop-color="#5fb83c"/></linearGradient>
+<linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a3fb0"/><stop offset="1" stop-color="#27124f"/></linearGradient>
+<linearGradient id="fall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".6" stop-color="#cfefff" stop-opacity=".7"/><stop offset="1" stop-color="#cfefff" stop-opacity=".15"/></linearGradient>
+<linearGradient id="crystal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9be7ff"/><stop offset=".5" stop-color="#3b6ef0"/><stop offset="1" stop-color="#7a3df0"/></linearGradient>
+<linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bff6ff" stop-opacity="0"/><stop offset="1" stop-color="#bff6ff" stop-opacity=".8"/></linearGradient>
+<linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8f56a"/><stop offset="1" stop-color="#2f9e44"/></linearGradient>
+<linearGradient id="pod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e599f7"/><stop offset="1" stop-color="#7b2cbf"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3a6"/><stop offset="1" stop-color="#f5b942"/></linearGradient>
+<linearGradient id="title" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ffe9f7"/></linearGradient>
+<filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>
+<filter id="haze" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+<clipPath id="frame"><rect width="1200" height="420" rx="18"/></clipPath>
+</defs>"""
+    )
+    p.append('<g clip-path="url(#frame)">')
+    p.append(f'<rect width="{W}" height="{H}" fill="url(#sky)"/>')
+    p.append(stars())
+    p.append(rays(600, 62))
+
+    # sky crystal (the light source)
+    p.append('<circle cx="600" cy="62" r="120" fill="url(#glow)" class="pulse"/>')
+    p.append('<polygon points="600,40 618,62 600,84 582,62" fill="url(#gold)" stroke="#fff" stroke-width="2"/>')
+
+    # drifting clouds
+    for i, (y, s, d) in enumerate(((70, 1.0, 0), (128, 0.7, 40), (36, 0.55, 70))):
+        p.append(
+            f'<g class="cloud" style="animation-delay:-{d}s"><g transform="translate(0,{y}) scale({s})" '
+            f'fill="#fff" fill-opacity=".5" filter="url(#haze)"><ellipse cx="110" cy="0" rx="110" ry="14"/>'
+            f'<ellipse cx="150" cy="-12" rx="60" ry="14"/></g></g>'
         )
 
-    # ---- background -----------------------------------------------------------
-    parts.append(
-        f'<defs><pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse">'
-        f'<rect width="20" height="20" fill="{BG}"/><rect width="1" height="20" fill="{GRID}"/>'
-        f'<rect width="20" height="1" fill="{GRID}"/></pattern>'
-        f'<pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">'
-        f'<rect width="4" height="2" fill="#000" fill-opacity="0.18"/></pattern>'
-        f'<linearGradient id="title" x1="0" x2="1"><stop offset="0" stop-color="{CYAN}"/>'
-        f'<stop offset=".5" stop-color="{PURPLE}"/><stop offset="1" stop-color="{PINK}"/></linearGradient>'
-        f'<linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>'
-        f'<stop offset=".5" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
-        f'<clipPath id="tclip"><rect x="0" y="0" width="{W}" height="{H}"/></clipPath></defs>'
+    p.append(castle(930, 150))
+    p.append(rainbow_arc(300, 372, 232))
+
+    # land: far snowy range, mid hills, near meadow
+    p.append(
+        '<path d="M0,300 L80,268 L150,284 L250,236 L330,270 L430,246 L520,276 L600,226 L690,268 L780,244 '
+        'L880,278 L980,240 L1080,272 L1150,256 L1200,270 L1200,420 L0,420 Z" fill="url(#far)" opacity=".92"/>'
     )
-    parts.append(f'<rect width="{W}" height="{H}" fill="url(#g)"/>')
+    p.append(
+        '<path d="M0,330 C120,296 220,322 340,308 C470,292 560,330 690,312 C820,294 930,326 1040,308 '
+        'C1110,298 1160,306 1200,300 L1200,420 L0,420 Z" fill="url(#mid)"/>'
+    )
+    # winding river
+    p.append(
+        '<path d="M612,318 C580,338 668,350 632,368 C596,386 700,400 660,420 L560,420 C600,400 520,386 568,366 '
+        'C610,350 540,338 596,318 Z" fill="#dff6ff" fill-opacity=".85"/>'
+    )
+    p.append(
+        '<path d="M0,372 C150,344 300,372 450,362 C600,352 760,380 900,364 C1020,352 1120,366 1200,356 '
+        'L1200,420 L0,420 Z" fill="url(#near)"/>'
+    )
+    # tiny rock pillars on the plain
+    for x, hh in ((420, 20), (470, 14), (760, 22), (820, 15), (540, 12)):
+        p.append(f'<rect x="{x}" y="{336 - hh}" width="7" height="{hh}" rx="3" fill="#6fbf93"/>')
+        p.append(f'<ellipse cx="{x + 3.5}" cy="{336 - hh}" rx="8" ry="3.5" fill="#8fdc6a"/>')
 
-    # stars
-    stars = []
-    import random
-
-    rnd = random.Random(7)
-    for _ in range(60):
-        sx, sy = rnd.randrange(0, W, 4), rnd.randrange(0, 200, 4)
-        d = rnd.uniform(0, 2.4)
-        c = rnd.choice([WHITE, CYAN, PURPLE, PINK])
-        stars.append(f'<rect x="{sx}" y="{sy}" width="3" height="3" fill="{c}" style="animation-delay:-{d:.2f}s"/>')
-    parts.append('<g class="stars">' + "".join(stars) + "</g>")
-
-    # ---- HUD ------------------------------------------------------------------
-    parts.append(f'<rect x="0" y="0" width="{W}" height="44" fill="#05050c"/>')
-    parts.append(f'<rect x="0" y="44" width="{W}" height="3" fill="{PURPLE_DK}"/>')
-    t, _ = text_pixels("1UP", 28, 14, 3, PINK)
-    parts.append(t)
-    t, _ = text_pixels("IDO YAHAV", 110, 14, 3, WHITE)
-    parts.append(t)
-    t, _ = text_pixels("LIVES", 520, 14, 3, LIGHT)
-    parts.append(t)
-    for i in range(3):
-        t, _ = text_pixels("♥", 640 + i * 24, 14, 3, PINK)
-        parts.append(t)
-    t, _ = text_pixels("LEVEL 22", 780, 14, 3, LIGHT)
-    parts.append(t)
-    t, _ = text_pixels("SCORE", 960, 14, 3, LIGHT)
-    parts.append(t)
-    # score counter: five values shown in turn
-    for i in range(6):
-        val = f"{i*100:05d}"
-        start = 0 if i == 0 else (pickup_x[i - 1] - 60) / 980 * 100
-        end = 100 if i == 5 else (pickup_x[i] - 60) / 980 * 100
-        parts.append(
-            f"<style>@keyframes sc{i} {{ 0%,{start:.1f}% {{ opacity:{1 if i==0 else 0} }} "
-            f"{start+0.1 if i else 0:.1f}%,{end:.1f}% {{ opacity:1 }} {end+0.1:.1f}%,100% {{ opacity:{0} }} }}"
-            f".sc{i} {{ animation: sc{i} 12s steps(1) infinite }}</style>"
+    # floating islands
+    left = island(40, 206, 230, [(150, 34), (196, 18)], "ia")
+    left.append(bulb(110, 204, 0.45))
+    left.append("</g>")
+    p.append("".join(left))
+    right = island(905, 226, 260, [(22, 36), (70, 16)], "ib")
+    right.append(spire(1060, 224))
+    right.append("</g>")
+    p.append("".join(right))
+    # floating luminous seeds + fireflies
+    for x, y, s, d in ((300, 150, 0.6, 0), (392, 96, 0.42, 3), (850, 96, 0.5, 5), (1150, 130, 0.45, 2)):
+        p.append(jelly(x, y, s, d))
+    for _ in range(22):
+        x, y = rnd.uniform(20, W - 60), rnd.uniform(250, 410)
+        p.append(
+            f'<circle class="fly" cx="{x:.0f}" cy="{y:.0f}" r="{rnd.choice([2, 2.5, 3])}" fill="#fff7a8" '
+            f'style="animation-delay:-{rnd.uniform(0, 9):.1f}s"/>'
         )
-        t, _ = text_pixels(val, 1070, 14, 3, YELLOW)
-        parts.append(f'<g class="sc{i}">{t}</g>')
 
-    # ---- title ----------------------------------------------------------------
-    title = "HELLO THERE"
-    tw = text_width(title, 10)
-    tx = (W - tw) // 2 + 20
-    # terminal prompt before the title, blinking block cursor after it
-    t, _ = text_pixels(">", tx - 80, 78, 10, GREEN)
-    parts.append(t)
-    parts.append(f'<rect class="blink" x="{tx + tw + 20}" y="78" width="40" height="70" fill="{GREEN}"/>')
-    # glow layer (offset copies, low opacity)
-    for dx, dy in ((-3, 0), (3, 0), (0, -3), (0, 3)):
-        t, _ = text_pixels(title, tx + dx, 78 + dy, 10, PURPLE, extra=' fill-opacity="0.22"')
-        parts.append(f'<g class="glow">{t}</g>')
-    t, _ = text_pixels(title, tx, 78, 10, "url(#title)")
-    parts.append(t)
-    # moving shine across the title
-    parts.append(
-        f'<g clip-path="url(#tclip)"><rect class="shine" x="0" y="70" width="160" height="90" fill="url(#sh)"/></g>'
+    # foreground flora
+    p.append(tendril(24, 430, 1.0))
+    p.append(tendril(92, 436, 0.7))
+    p.append(tendril(1182, 432, 0.95, flip=True))
+    p.append(tendril(1118, 438, 0.6, flip=True))
+    p.append(bulb(170, 424, 0.8))
+    p.append(bulb(1040, 426, 0.7))
+    p.append(bulb(232, 430, 0.5))
+
+    # greeting
+    p.append('<ellipse cx="600" cy="196" rx="430" ry="92" fill="url(#veil)"/>')
+    p.append(
+        '<text class="t" x="600" y="208" font-size="104" font-style="italic" font-weight="700" '
+        'fill="url(#title)" stroke="#1d0f52" stroke-width="10">Hello there</text>'
     )
-
-    sub = "IDO YAHAV . FULL-STACK DEVELOPER"
-    sw = text_width(sub, 4)
-    t, _ = text_pixels(sub, (W - sw) // 2, 172, 4, LIGHT)
-    parts.append(t)
-
-    # ---- level floor ----------------------------------------------------------
-    floor_y = 290
-    parts.append(f'<rect x="0" y="{floor_y}" width="{W}" height="{H - floor_y}" fill="#05050c"/>')
-    # scrolling brick pattern
-    bricks = []
-    for bx in range(-64, W + 64, 32):
-        bricks.append(f'<rect x="{bx}" y="{floor_y}" width="28" height="12" fill="{PURPLE_DK}"/>')
-        bricks.append(f'<rect x="{bx+16}" y="{floor_y+16}" width="28" height="12" fill="#3b1d7a"/>')
-    parts.append(
-        f'<g clip-path="url(#tclip)"><g style="animation:scroll 1.2s linear infinite">{"".join(bricks)}</g></g>'
+    p.append(
+        '<text class="t" x="600" y="258" font-size="30" letter-spacing="2" fill="#fff" '
+        'stroke="#1d0f52" stroke-width="6">I\'m Ido Yahav  ✦  full-stack developer</text>'
     )
-    parts.append(f'<rect x="0" y="{floor_y}" width="{W}" height="2" fill="{PINK}"/>')
-
-    # ---- pickups --------------------------------------------------------------
-    icons = [ICON_CODE, ICON_DB, ICON_CLOUD, ICON_MOBILE, ICON_BOLT]
-    icon_cols = [CYAN, GREEN, LIGHT, PINK, YELLOW]
-    for i, (x, ic, col) in enumerate(zip(pickup_x, icons, icon_cols)):
-        y = floor_y - 50
-        pal = {"1": col, "2": WHITE}
-        s = sprite_pixels(ic, x - 14, y - 14, 4, pal)
-        parts.append(f'<g class="pk{i} bob" style="animation-delay:0s,-{i*0.3:.1f}s">{s}</g>')
-        t, _ = text_pixels("+100", x - 24, y - 40, 3, YELLOW)
-        parts.append(f'<g class="pop{i}">{t}</g>')
-
-    # ---- BYTE the sprite -------------------------------------------------------
-    sx, sy = 60, floor_y - 64
-    body = sprite_pixels([r.replace("v", ".").replace("w", ".").replace("t", ".") for r in BYTE], 0, 0, px, BYTE_PAL)
-    visor = sprite_pixels(
-        [r.replace("b", ".").replace("p", ".").replace("a", ".").replace("t", ".") for r in BYTE], 0, 0, px, BYTE_PAL
-    )
-    thr = sprite_pixels(
-        [r.replace("b", ".").replace("p", ".").replace("a", ".").replace("v", ".").replace("w", ".") for r in BYTE],
-        0, 0, px, BYTE_PAL,
-    )
-    parts.append(
-        f'<g class="byte"><g transform="translate({sx},{sy})"><g class="bob">'
-        f'{body}'
-        f'<rect class="tip" x="{6*px}" y="0" width="{px}" height="{px}" fill="{PINK}"/>'
-        f'<g class="vis">{visor}</g>'
-        f'<g class="thr">{thr}</g>'
-        f"</g></g></g>"
-    )
-
-    # ---- overlays --------------------------------------------------------------
-    parts.append(f'<rect width="{W}" height="{H}" fill="url(#scan)"/>')
-    parts.append(f'<rect x="0" y="0" width="{W}" height="{H}" fill="none" stroke="{PURPLE_DK}" stroke-width="6"/>')
-    parts.append("</svg>")
-    return "\n".join(parts)
+    p.append("</g>")
+    p.append("</svg>")
+    return "\n".join(p)
 
 
 if __name__ == "__main__":
