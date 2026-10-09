@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-Generates the animated pixel-art SVGs used in the profile README:
-  assets/hero.svg         - arcade "level" banner with an original sprite
-  assets/player-card.svg  - the stats card ("PLAYER CARD")
+Generates the animated pixel-art SVG used in the profile README:
+  assets/hero.svg  - arcade "level" banner with an original sprite
 
 Everything is self-contained: no external fonts (GitHub strips them from
 SVGs), every glyph is a 5x7 bitmap, and all motion is plain CSS keyframes,
@@ -216,12 +215,12 @@ ICON_BOLT = [
 
 
 def build_hero():
-    W, H = 1200, 420
+    W, H = 1200, 334
     px = 4
     parts = []
     parts.append(
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
-        f'shape-rendering="crispEdges" role="img" aria-label="Ido Yahav - full-stack developer">'
+        f'shape-rendering="crispEdges" role="img" aria-label="Hello there - Ido Yahav, full-stack developer">'
     )
 
     # ---- styles / animations -------------------------------------------------
@@ -282,7 +281,7 @@ def build_hero():
 
     rnd = random.Random(7)
     for _ in range(60):
-        sx, sy = rnd.randrange(0, W, 4), rnd.randrange(0, 250, 4)
+        sx, sy = rnd.randrange(0, W, 4), rnd.randrange(0, 200, 4)
         d = rnd.uniform(0, 2.4)
         c = rnd.choice([WHITE, CYAN, PURPLE, PINK])
         stars.append(f'<rect x="{sx}" y="{sy}" width="3" height="3" fill="{c}" style="animation-delay:-{d:.2f}s"/>')
@@ -318,9 +317,13 @@ def build_hero():
         parts.append(f'<g class="sc{i}">{t}</g>')
 
     # ---- title ----------------------------------------------------------------
-    title = "IDO YAHAV"
+    title = "HELLO THERE"
     tw = text_width(title, 10)
-    tx = (W - tw) // 2
+    tx = (W - tw) // 2 + 20
+    # terminal prompt before the title, blinking block cursor after it
+    t, _ = text_pixels(">", tx - 80, 78, 10, GREEN)
+    parts.append(t)
+    parts.append(f'<rect class="blink" x="{tx + tw + 20}" y="78" width="40" height="70" fill="{GREEN}"/>')
     # glow layer (offset copies, low opacity)
     for dx, dy in ((-3, 0), (3, 0), (0, -3), (0, 3)):
         t, _ = text_pixels(title, tx + dx, 78 + dy, 10, PURPLE, extra=' fill-opacity="0.22"')
@@ -332,22 +335,13 @@ def build_hero():
         f'<g clip-path="url(#tclip)"><rect class="shine" x="0" y="70" width="160" height="90" fill="url(#sh)"/></g>'
     )
 
-    sub = "FULL-STACK DEVELOPER"
+    sub = "IDO YAHAV . FULL-STACK DEVELOPER"
     sw = text_width(sub, 4)
-    t, _ = text_pixels(sub, (W - sw) // 2, 168, 4, LIGHT)
+    t, _ = text_pixels(sub, (W - sw) // 2, 172, 4, LIGHT)
     parts.append(t)
-    tags = "REACT NATIVE . NODE.JS . TYPESCRIPT . POSTGRES"
-    tgw = text_width(tags, 3)
-    t, _ = text_pixels(tags, (W - tgw) // 2, 206, 3, CYAN)
-    parts.append(t)
-
-    ps = "PRESS ★ TO START"
-    pw = text_width(ps, 3)
-    t, _ = text_pixels(ps, (W - pw) // 2, 246, 3, YELLOW)
-    parts.append(f'<g class="blink">{t}</g>')
 
     # ---- level floor ----------------------------------------------------------
-    floor_y = 372
+    floor_y = 290
     parts.append(f'<rect x="0" y="{floor_y}" width="{W}" height="{H - floor_y}" fill="#05050c"/>')
     # scrolling brick pattern
     bricks = []
@@ -396,84 +390,8 @@ def build_hero():
     return "\n".join(parts)
 
 
-def build_card():
-    W, H = 1200, 340
-    parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
-        f'shape-rendering="crispEdges" role="img" aria-label="Player card">'
-    ]
-    parts.append(
-        """<style>
-@keyframes blink { 0%,49% { opacity:1 } 50%,100% { opacity:0 } }
-@keyframes bar { 0% { width:0 } 100% { width:var(--w) } }
-@keyframes type { 0% { opacity:0 } 100% { opacity:1 } }
-.blink { animation: blink 1s steps(1) infinite }
-.bar { animation: bar 1.6s steps(12) forwards }
-.row { opacity:0; animation: type .01s steps(1) forwards }
-</style>"""
-    )
-    parts.append(
-        f'<defs><pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">'
-        f'<rect width="4" height="2" fill="#000" fill-opacity="0.18"/></pattern></defs>'
-    )
-    parts.append(f'<rect width="{W}" height="{H}" fill="{BG}"/>')
-    parts.append(f'<rect x="4" y="4" width="{W-8}" height="{H-8}" fill="none" stroke="{PURPLE_DK}" stroke-width="6"/>')
-    # header bar
-    parts.append(f'<rect x="10" y="10" width="{W-20}" height="34" fill="#16123a"/>')
-    t, _ = text_pixels("PLAYER CARD", 30, 18, 3, PINK)
-    parts.append(t)
-    t, _ = text_pixels("STATUS: ONLINE", 930, 18, 3, GREEN)
-    parts.append(t)
-    parts.append(f'<rect class="blink" x="1150" y="20" width="12" height="12" fill="{GREEN}"/>')
-
-    rows = [
-        ("NAME", "IDO YAHAV", WHITE),
-        ("CLASS", "FULL-STACK DEVELOPER", WHITE),
-        ("MAIN WEAPON", "TYPESCRIPT", CYAN),
-        ("STACK", "REACT NATIVE . NODE . EXPRESS . PRISMA . POSTGRES", CYAN),
-        ("SIDE QUESTS", "PYTHON . C . SECURITY RESEARCH . DEEP LEARNING", LIGHT),
-        ("BASE", "ISRAEL", LIGHT),
-        ("MOTTO", "BUILD . BREAK . LEARN . SHIP", PINK),
-    ]
-    y = 68
-    for i, (k, v, c) in enumerate(rows):
-        t, _ = text_pixels(k, 36, y, 3, PURPLE)
-        parts.append(f'<g class="row" style="animation-delay:{i*0.25:.2f}s">{t}</g>')
-        t, _ = text_pixels(v, 300, y, 3, c)
-        parts.append(f'<g class="row" style="animation-delay:{i*0.25+0.1:.2f}s">{t}</g>')
-        y += 30
-
-    # skill bars
-    skills = [("FRONTEND", 92, CYAN), ("BACKEND", 88, PURPLE), ("MOBILE", 85, PINK), ("DEVOPS", 60, YELLOW)]
-    bx, by = 36, y + 8
-    for i, (name, pct, col) in enumerate(skills):
-        t, _ = text_pixels(name, bx, by, 3, LIGHT)
-        parts.append(t)
-        w = int(pct * 2.2)
-        parts.append(f'<rect x="{bx+160}" y="{by}" width="220" height="20" fill="#16123a"/>')
-        parts.append(
-            f'<rect class="bar" x="{bx+160}" y="{by}" height="20" width="0" fill="{col}" '
-            f'style="--w:{w}px; animation-delay:{1.8+i*0.2:.1f}s"/>'
-        )
-        t, _ = text_pixels(f"{pct}", bx + 400, by, 3, col)
-        parts.append(t)
-        # two columns
-        if i == 1:
-            bx, by = 640, y + 8
-        else:
-            by += 30
-
-    # prompt line
-    t, cx = text_pixels("> _", 36, H - 34, 3, GREEN)
-    parts.append(t)
-    parts.append(f'<rect width="{W}" height="{H}" fill="url(#scan)"/>')
-    parts.append("</svg>")
-    return "\n".join(parts)
-
-
 if __name__ == "__main__":
     out = ROOT / "assets"
     out.mkdir(exist_ok=True)
     (out / "hero.svg").write_text(build_hero(), encoding="utf-8")
-    (out / "player-card.svg").write_text(build_card(), encoding="utf-8")
-    print("wrote", out / "hero.svg", out / "player-card.svg")
+    print("wrote", out / "hero.svg")
